@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>hello page</h1>
+<form action="/welcome" method="post">
+    <input name="password" type="password">
+    <button type="submit">send</button>
+</form>
+<h1 id="data"></h1>
+<script>
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        console.log(this.readyState);
+        if (this.readyState === 4) {
+            const data = JSON.parse(this.response);
+            document.getElementById("data").innerText = `name: ${data.name}`;
+        }
+    };
+    xhr.open("GET", "http://localhost:8080/ajax", false);
+    xhr.send();
+    console.log("end")
+</script>
+</body>
+</html>
